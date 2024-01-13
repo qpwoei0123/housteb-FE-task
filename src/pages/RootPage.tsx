@@ -15,7 +15,7 @@ const RootPage = () => {
 
 const Container = styled.div`
   width: 300px;
-  height: 100%;
+  height: 100vh;
   background-color: black;
   display: flex;
   flex-direction: column;

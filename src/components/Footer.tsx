@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import useTotalPriceStore from "../store/TotalPriceStore";
+import useTotalQuantityStore from "../store/TotalQuantityStore";
 
 const Footer = () => {
+  const totalPrice = useTotalPriceStore((state) => state.totalPrice);
+  const totalQuantity = useTotalQuantityStore((state) => state.totalQuantity);
   return (
     <Container>
       <FooterContent>
-        <FooterText>총 수량: 0개</FooterText>
-        <FooterText>총 가격: 0개</FooterText>
-        <FooterButton>주문 하기</FooterButton>
+        <FooterText>{`총 수량: ${totalQuantity}개`}</FooterText>
+        <FooterText>{`총 가격: ${totalPrice}원`}</FooterText>
+        <FooterButton disabled={totalQuantity == 0}>주문 하기</FooterButton>
       </FooterContent>
     </Container>
   );
@@ -41,10 +45,11 @@ const FooterText = styled.p`
 const FooterButton = styled.button`
   width: 100%;
   height: 50px;
-  background-color: black;
-  color: white;
+  background-color: ${(props) => (props.disabled ? "#888" : "black")};
+  color: ${(props) => (props.disabled ? "#ccc" : "white")};
   margin-top: 10px;
   border: 0;
   font-size: medium;
+  cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
 `;
 export default Footer;

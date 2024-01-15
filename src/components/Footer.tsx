@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import useTotalPriceStore from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const totalPrice = useTotalPriceStore((state) => state.totalPrice);
   const totalQuantity = useTotalQuantityStore((state) => state.totalQuantity);
+  const navigate = useNavigate();
+  const handler = () => {
+    navigate("/complete");
+  };
   return (
     <Container>
       <FooterContent>
         <FooterText>{`총 수량: ${totalQuantity}개`}</FooterText>
         <FooterText>{`총 가격: ${totalPrice}원`}</FooterText>
-        <FooterButton disabled={totalQuantity == 0}>주문 하기</FooterButton>
+        <FooterButton onClick={handler} disabled={totalQuantity == 0}>
+          주문 하기
+        </FooterButton>
       </FooterContent>
     </Container>
   );

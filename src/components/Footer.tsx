@@ -2,21 +2,38 @@ import styled from "styled-components";
 import useTotalPriceStore from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
   const totalPrice = useTotalPriceStore((state) => state.totalPrice);
   const totalQuantity = useTotalQuantityStore((state) => state.totalQuantity);
   const navigate = useNavigate();
-  const handler = () => {
-    navigate("/complete");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [buttonText, setButtonText] = useState("주문 하기");
+
+  const handleClick = () => {
+    setIsButtonDisabled(true);
+    setButtonText("로딩 중...");
+    setTimeout(() => {
+      navigate("/complete");
+    }, 1000);
   };
+
+  useEffect(() => {
+    if (totalQuantity > 0) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [totalQuantity]);
+
   return (
     <Container>
       <FooterContent>
         <FooterText>{`총 수량: ${totalQuantity}개`}</FooterText>
         <FooterText>{`총 가격: ${totalPrice}원`}</FooterText>
-        <FooterButton onClick={handler} disabled={totalQuantity == 0}>
-          주문 하기
+        <FooterButton onClick={handleClick} disabled={isButtonDisabled}>
+          {buttonText}
         </FooterButton>
       </FooterContent>
     </Container>

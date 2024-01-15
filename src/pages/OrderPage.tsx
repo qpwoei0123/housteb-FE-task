@@ -22,7 +22,6 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const data = await getItems();
         setItems(data);
       } catch (error) {
@@ -31,13 +30,10 @@ const OrderPage = () => {
         setLoading(false);
       }
     };
-
-    fetchData();
-  }, [setLoading]);
-
-  useEffect(() => {
     resetTotalPrice();
     resetTotalQuantity();
+    setLoading(true);
+    setTimeout(() => fetchData(), 1000);
   }, []);
 
   return (

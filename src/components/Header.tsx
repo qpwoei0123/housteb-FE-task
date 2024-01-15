@@ -17,6 +17,9 @@ const Container = styled.header`
   display: flex;
   top: 0;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
 `;
 const HeaderIcon = styled.img`
   padding: 12px;

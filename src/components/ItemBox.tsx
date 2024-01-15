@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import EventChecker from "./EventChecker";
 import { Item } from "../types/item";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useTotalPriceStore from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
 
@@ -32,9 +32,7 @@ const ItemBox: React.FC<Item> = ({ name, event, materialType, price }) => {
       subtractTotalQuantity();
     }
   };
-  useEffect(() => {
-    console.log(quantity * price);
-  }, [quantity]);
+
   return (
     <Container hasBackground={quantity > 0}>
       <ItemImg />
@@ -65,6 +63,9 @@ const Container = styled.div<{ hasBackground: boolean }>`
   display: flex;
   padding: 10px;
   gap: 15px;
+  @media (max-width: 500px) {
+    width: 80vw;
+  }
 `;
 
 const ItemImg = styled.img`

@@ -14,7 +14,7 @@ const RootPage = () => {
 };
 
 const Container = styled.div`
-  width: 300px;
+  width: 100vw;
   height: 100vh;
   background-color: black;
   display: flex;

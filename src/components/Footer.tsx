@@ -31,7 +31,9 @@ const Footer = () => {
     <Container>
       <FooterContent>
         <FooterText>{`총 수량: ${totalQuantity}개`}</FooterText>
-        <FooterText>{`총 가격: ${totalPrice}원`}</FooterText>
+        <FooterText>{`총 가격: ${totalPrice.toLocaleString(
+          "ko-KR"
+        )}원`}</FooterText>
         <FooterButton onClick={handleClick} disabled={isButtonDisabled}>
           {buttonText}
         </FooterButton>
@@ -51,6 +53,9 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
 `;
 
 const FooterContent = styled.div`
@@ -58,6 +63,9 @@ const FooterContent = styled.div`
   width: 250px;
   flex-direction: column;
   gap: 5px;
+  @media (max-width: 500px) {
+    width: 80vw;
+  }
 `;
 
 const FooterText = styled.p`

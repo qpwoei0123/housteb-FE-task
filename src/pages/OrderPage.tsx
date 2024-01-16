@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getItems } from "../api/getItems";
 import { Item } from "../types/item";
 import useLoadingStore from "../store/LodingStore";
-import useTotalPriceStore from "../store/TotalPriceStore";
+import { useTotalPriceStore } from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
 
 const OrderPage = () => {

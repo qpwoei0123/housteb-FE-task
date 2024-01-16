@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 type TotalPriceProps = {
   totalPrice: number;
@@ -7,7 +7,7 @@ type TotalPriceProps = {
   resetTotalPrice: () => void;
 };
 
-const useTotalPriceStore = create<TotalPriceProps>((set) => ({
+export const useTotalPriceStore = create<TotalPriceProps>((set) => ({
   totalPrice: 0,
   addTotalPrice: (value: number) =>
     set((state) => ({ totalPrice: state.totalPrice + value })),
@@ -15,5 +15,3 @@ const useTotalPriceStore = create<TotalPriceProps>((set) => ({
     set((state) => ({ totalPrice: state.totalPrice - value })),
   resetTotalPrice: () => set({ totalPrice: 0 }),
 }));
-
-export default useTotalPriceStore;

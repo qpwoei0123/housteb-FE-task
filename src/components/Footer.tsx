@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import useTotalPriceStore from "../store/TotalPriceStore";
+import { useTotalPriceStore } from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import fakePayment from "../api/fakePayment";
 
 const Footer = () => {
   const totalPrice = useTotalPriceStore((state) => state.totalPrice);
@@ -11,14 +12,18 @@ const Footer = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("주문 하기");
 
-  const handleClick = () => {
-    setIsButtonDisabled(true);
-    setButtonText("로딩 중...");
-    setTimeout(() => {
+  const handlePayment = async () => {
+    try {
+      setIsButtonDisabled(true);
+      setButtonText("로딩 중...");
+      // 결제 성공하는 경우 (임시로 성공)
+      await fakePayment(true);
       navigate("/complete");
-    }, 1000);
+    } catch (error) {
+      // 결제 실패하는 경우
+      navigate("/error");
+    }
   };
-
   useEffect(() => {
     if (totalQuantity > 0) {
       setIsButtonDisabled(false);
@@ -34,7 +39,7 @@ const Footer = () => {
         <FooterText>{`총 가격: ${totalPrice.toLocaleString(
           "ko-KR"
         )}원`}</FooterText>
-        <FooterButton onClick={handleClick} disabled={isButtonDisabled}>
+        <FooterButton onClick={handlePayment} disabled={isButtonDisabled}>
           {buttonText}
         </FooterButton>
       </FooterContent>

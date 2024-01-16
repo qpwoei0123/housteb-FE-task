@@ -2,7 +2,7 @@ import styled from "styled-components";
 import EventChecker from "./EventChecker";
 import { Item } from "../types/item";
 import { useState } from "react";
-import useTotalPriceStore from "../store/TotalPriceStore";
+import { useTotalPriceStore } from "../store/TotalPriceStore";
 import useTotalQuantityStore from "../store/TotalQuantityStore";
 
 const ItemBox: React.FC<Item> = ({ name, event, materialType, price }) => {
@@ -34,7 +34,7 @@ const ItemBox: React.FC<Item> = ({ name, event, materialType, price }) => {
   };
 
   return (
-    <Container hasBackground={quantity > 0}>
+    <Container $hasbackground={quantity > 0}>
       <ItemImg />
       <ItemContentsDiv>
         <FlexBox>
@@ -54,12 +54,13 @@ const ItemBox: React.FC<Item> = ({ name, event, materialType, price }) => {
   );
 };
 
-const Container = styled.div<{ hasBackground: boolean }>`
+const Container = styled.div<{ $hasbackground: boolean }>`
   width: 250px;
   height: 65px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 15px;
-  background-color: ${(props) => (props.hasBackground ? "#f75a2f3c" : "white")};
+  background-color: ${(props) =>
+    props.$hasbackground ? "#f75a2f3c" : "white"};
   display: flex;
   padding: 10px;
   gap: 15px;
